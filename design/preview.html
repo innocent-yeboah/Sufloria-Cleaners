@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sufloria Cleaners — design preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal: #0b3d3a;
+      --teal-mid: #0f5c56;
+      --gold: #c9a227;
+      --gold-light: #e8c547;
+      --gold-dark: #8b6914;
+      --cream: #f4efe4;
+      --ink: #1a1a1a;
+      --muted: #4d5a58;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+    }
+    .switcher {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      background: #071f1d;
+      color: var(--cream);
+      font-size: 13px;
+    }
+    .switcher span { margin-right: 8px; color: var(--gold-light); }
+    .switcher button {
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--cream);
+      border-radius: 999px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font: inherit;
+    }
+    .switcher button.is-on {
+      background: var(--gold);
+      color: var(--teal);
+      font-weight: 700;
+    }
+    .poster {
+      width: min(1120px, calc(100% - 24px));
+      margin: 18px auto 80px;
+      background: var(--white);
+      border: 4px solid var(--gold);
+      box-shadow: inset 0 0 0 1px var(--gold-light);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+    header.bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 18px;
+      background: var(--teal);
+      border-bottom: 3px solid var(--gold);
+      color: var(--cream);
+    }
+    .brand { line-height: 1.05; }
+    .brand strong {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.35rem;
+      color: var(--gold-light);
+    }
+    .brand em {
+      display: block;
+      font-family: "Great Vibes", cursive;
+      font-style: normal;
+      font-size: 0.95rem;
+      color: var(--gold);
+    }
+    nav.links { display: none; gap: 16px; font-size: 0.9rem; }
+    .phone {
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 2px solid var(--gold-dark);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--teal); }
+    .btn-line { background: transparent; color: var(--gold); border-color: var(--gold); }
+    .btn-white { background: var(--white); color: var(--teal); border-color: var(--white); }
+    .wrap { width: min(100%, 1000px); margin: 0 auto; padding: 0 18px; }
+    .hero {
+      display: grid;
+      gap: 20px;
+      padding: 28px 18px 32px;
+      position: relative;
+    }
+    .seal {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      background: var(--teal);
+      color: var(--gold-light);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    h1, h2 { font-family: "Playfair Display", Georgia, serif; margin: 0 0 10px; color: var(--teal); }
+    h1 { font-size: clamp(1.7rem, 4vw, 2.55rem); line-height: 1.15; }
+    .script {
+      font-family: "Great Vibes", cursive;
+      color: var(--gold-dark);
+      font-size: 1.55rem;
+      margin: 0 0 16px;
+    }
+    .lead { color: var(--muted); margin: 0 0 16px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .shot {
+      min-height: 220px;
+      border: 3px solid var(--gold);
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, transparent 55%, rgba(11,61,58,0.55)),
+        linear-gradient(160deg, #d9e6e3, #9bb3ab);
+      display: flex;
+      align-items: flex-end;
+    }
+    .shot span {
+      width: 100%;
+      background: var(--teal);
+      color: var(--cream);
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .medals {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 8px 18px 24px;
+    }
+    .medal {
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      aspect-ratio: 1;
+      max-width: 150px;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px;
+      background: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .medal b { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
+    .section { padding: 8px 0 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .tile .shot { min-height: 130px; }
+    .journeys { display: grid; gap: 12px; }
+    .panel {
+      border: 3px solid var(--gold);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .panel h3 {
+      margin: 0;
+      background: var(--teal);
+      color: var(--gold-light);
+      padding: 10px 14px;
+      font-family: "Playfair Display", Georgia, serif;
+    }
+    .panel p { margin: 0; padding: 12px 14px; color: var(--muted); font-size: 0.92rem; }
+    .ticks { list-style: none; padding: 0; margin: 0; }
+    .ticks li { padding: 6px 0 6px 28px; position: relative; }
+    .ticks li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 10px;
+      width: 14px; height: 8px;
+      border-left: 3px solid var(--gold);
+      border-bottom: 3px solid var(--gold);
+      transform: rotate(-45deg);
+    }
+    .band {
+      margin: 8px 18px 22px;
+      background: var(--teal);
+      color: var(--cream);
+      border: 3px solid var(--gold);
+      border-radius: 16px;
+      padding: 22px 18px;
+    }
+    .band h2, .band p { color: var(--cream); }
+    .band .lead { color: #d5e4e1; }
+    footer.foot {
+      background: #071f1d;
+      color: #d5e4e1;
+      padding: 22px 18px 28px;
+      border-top: 3px solid var(--gold);
+      font-size: 0.88rem;
+    }
+    footer.foot strong { color: var(--gold-light); font-family: "Playfair Display", Georgia, serif; }
+    .wa {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: var(--teal);
+      color: var(--gold-light);
+      border: 3px solid var(--gold);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      z-index: 30;
+    }
+    .form { display: grid; gap: 12px; padding-bottom: 24px; }
+    label { display: grid; gap: 6px; font-size: 0.88rem; font-weight: 600; }
+    input, select, textarea {
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      padding: 11px;
+      font: inherit;
+      background: var(--white);
+    }
+    .two { display: grid; gap: 12px; }
+    .page { display: none; }
+    .page.is-on { display: block; }
+    @media (min-width: 800px) {
+      nav.links { display: flex; }
+      .hero { grid-template-columns: 1.1fr 0.9fr; align-items: center; padding: 36px 28px; }
+      .grid { grid-template-columns: repeat(4, 1fr); }
+      .journeys { grid-template-columns: 1fr 1fr; }
+      .two { grid-template-columns: 1fr 1fr; }
+      .shot { min-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="switcher">
+    <span>Design preview</span>
+    <button type="button" class="is-on" data-page="home">Home</button>
+    <button type="button" data-page="service">Service page</button>
+    <button type="button" data-page="quote">Quote page</button>
+  </div>
+
+  <div class="poster">
+    <header class="bar">
+      <div class="brand"><strong>Sufloria</strong><em>A Higher Standard of Clean</em></div>
+      <nav class="links"><span>Services</span><span>About</span><span>Contact</span></nav>
+      <span class="phone">07386 544703</span>
+      <button class="btn btn-gold" type="button" data-page="quote">Get a free quote</button>
+    </header>
+
+    <section id="home" class="page is-on">
+      <div class="hero">
+        <div>
+          <div class="seal">Trusted local<br />cleaning experts</div>
+          <h1>More Than Cleaning. We Get Properties Ready.</h1>
+          <p class="script">A Higher Standard of Clean</p>
+          <p class="lead">Professional property cleaning for agents, landlords, developers, businesses and homeowners across Derby.</p>
+          <div class="actions">
+            <button class="btn btn-gold" type="button" data-page="quote">Get a free quote</button>
+            <button class="btn btn-line" type="button">WhatsApp us</button>
+          </div>
+        </div>
+        <div class="shot"><span>Prepared rental interior, Derby</span></div>
+      </div>
+      <div class="medals">
+        <div class="medal"><b>◆</b>Professional standards</div>
+        <div class="medal"><b>🛡</b>Reliable service</div>
+        <div class="medal"><b>🌿</b>A cleaner greener tomorrow</div>
+      </div>
+      <div class="wrap section">
+        <h2>Property cleaning, built around what happens next</h2>
+        <p class="lead">From tenant changeovers to new-build handovers, every job is quoted to the property.</p>
+        <div class="grid">
+          <article class="tile"><div class="shot"><span>End of tenancy</span></div></article>
+          <article class="tile"><div class="shot"><span>After builders</span></div></article>
+          <article class="tile"><div class="shot"><span>Move-in</span></div></article>
+          <article class="tile"><div class="shot"><span>Deep cleaning</span></div></article>
+          <article class="tile"><div class="shot"><span>Oven &amp; appliance</span></div></article>
+          <article class="tile"><div class="shot"><span>Carpet cleaning</span></div></article>
+          <article class="tile"><div class="shot"><span>Commercial</span></div></article>
+          <article class="tile"><div class="shot"><span>Decluttering</span></div></article>
+        </div>
+      </div>
+      <div class="wrap section journeys">
+        <article class="panel">
+          <h3>Tenancy turnaround</h3>
+          <p>Tenant leaves → end of tenancy → deep clean → carpets and appliances → move-in preparation → property ready.</p>
+        </article>
+        <article class="panel">
+          <h3>New-build handover</h3>
+          <p>Building work finishes → after-builders clean → re-clean → final sparkle → handover → show home or sales office.</p>
+        </article>
+      </div>
+      <div class="wrap section">
+        <h2>Who we work with</h2>
+        <p class="script">Let us do the dirty work.</p>
+        <ul class="ticks">
+          <li>Letting agents and landlords</li>
+          <li>Property managers</li>
+          <li>Housebuilders and developers</li>
+          <li>Airbnb and holiday lets</li>
+          <li>Businesses and offices</li>
+          <li>Homeowners</li>
+        </ul>
+      </div>
+      <div class="band">
+        <h2>Looking for a reliable cleaning partner?</h2>
+        <p class="lead">Speak to Sufloria about one-off jobs, property turnarounds and ongoing cleaning contracts.</p>
+        <div class="actions">
+          <button class="btn btn-gold" type="button" data-page="quote">Request a commercial quote</button>
+          <button class="btn btn-white" type="button" data-page="quote">Get a free quote</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="service" class="page">
+      <div class="hero">
+        <div>
+          <p class="lead" style="color:#c9a227;font-weight:700;margin-bottom:8px;">End of tenancy cleaning in Derby</p>
+          <h1>Inventory-ready properties for agents and landlords</h1>
+          <p class="lead">Professional end of tenancy cleaning designed around the next tenant, the next viewing, or the next inspection — quoted to the property.</p>
+          <button class="btn btn-gold" type="button" data-page="quote">Get a free quote</button>
+        </div>
+        <div class="shot"><span>Vacated rental, ready for inspection</span></div>
+      </div>
+      <div class="wrap section journeys">
+        <article class="panel">
+          <h3>What we focus on</h3>
+          <p>Kitchens, bathrooms, floors, touch points and the presentation details that matter at inventory.</p>
+        </article>
+        <article class="panel">
+          <h3>How to book</h3>
+          <p>Tell us the property, bedrooms, postcode and preferred date. Photos help us quote accurately.</p>
+        </article>
+      </div>
+      <div class="band">
+        <h2>Need this property ready?</h2>
+        <p class="lead">Request a tailored, no-obligation quote for your Derby end of tenancy clean.</p>
+        <button class="btn btn-gold" type="button" data-page="quote">Get a free quote</button>
+      </div>
+    </section>
+
+    <section id="quote" class="page">
+      <div class="wrap section">
+        <p class="script">Free, no-obligation quote</p>
+        <h1>Tell us about the property</h1>
+        <p class="lead">We will come back with a tailored quote. Photos of the space help us quote more accurately.</p>
+        <div class="form">
+          <div class="two">
+            <label>Enquiry type
+              <select><option>Residential</option><option selected>Commercial partner</option></select>
+            </label>
+            <label>I am a
+              <select><option selected>Letting or estate agent</option><option>Landlord</option><option>Developer</option><option>Homeowner</option></select>
+            </label>
+          </div>
+          <div class="two">
+            <label>Name <input value="Jordan Hale" /></label>
+            <label>Email <input value="jordan@derbylettings.co.uk" /></label>
+          </div>
+          <div class="two">
+            <label>Phone <input value="07386 544703" /></label>
+            <label>Service
+              <select><option selected>End of tenancy cleaning</option><option>After builders cleaning</option></select>
+            </label>
+          </div>
+          <div class="two">
+            <label>Bedrooms <select><option>1</option><option selected>3</option></select></label>
+            <label>Postcode <input value="DE1 2AA" /></label>
+          </div>
+          <label>Notes
+            <textarea rows="3">Void property, inventory on Friday. Kitchen and carpets need extra attention.</textarea>
+          </label>
+          <button class="btn btn-gold" type="button">Send quote request</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><strong>Sufloria Cleaners</strong> · A Higher Standard of Clean</p>
+      <p>07386 544703 · contact@sufloriacleaning.com · Derby and surrounding areas</p>
+    </footer>
+  </div>
+  <div class="wa">WhatsApp us</div>
+  <script>
+    const pages = document.querySelectorAll(".page");
+    const buttons = document.querySelectorAll("[data-page]");
+    function show(id) {
+      pages.forEach((p) => p.classList.toggle("is-on", p.id === id));
+      document.querySelectorAll(".switcher button").forEach((b) => {
+        b.classList.toggle("is-on", b.getAttribute("data-page") === id);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    buttons.forEach((b) => b.addEventListener("click", () => show(b.getAttribute("data-page"))));
+  </script>
+</body>
+</html>
