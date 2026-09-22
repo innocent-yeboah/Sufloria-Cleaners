@@ -72,8 +72,8 @@ export const metadata: Metadata = {
       "Sufloria Cleaners is a trusted cleaning company in Derby, providing commercial cleaning and end of tenancy cleaning. Request your free quote today.",
   },
   icons: {
-    icon: [{ url: "/brand/logo.jpg" }],
-    apple: [{ url: "/brand/logo.jpg" }],
+    icon: [{ url: "/brand/logo-seal.png" }],
+    apple: [{ url: "/brand/logo-seal.png" }],
   },
 };
 

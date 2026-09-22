@@ -41,15 +41,30 @@ export default function ServiceDetailPage({ params }: PageProps) {
               Get a free quote
             </Link>
           </div>
-          <div className="overflow-hidden rounded-2xl border-[3px] border-gold">
-            <Image
-              src={service.image}
-              alt={service.imageAlt}
-              width={1000}
-              height={740}
-              className="h-72 w-full object-cover"
-              priority
-            />
+          <div className="overflow-hidden rounded-2xl border-[3px] border-gold bg-white">
+            <div
+              className={
+                service.slug === "after-builders"
+                  ? "relative aspect-[4/5] w-full sm:aspect-[3/4]"
+                  : service.slug === "carpet"
+                    ? "relative aspect-square w-full"
+                    : "relative aspect-[4/3] w-full"
+              }
+            >
+              <Image
+                src={service.image}
+                alt={service.imageAlt}
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+                style={
+                  service.imagePosition
+                    ? { objectPosition: service.imagePosition }
+                    : undefined
+                }
+                priority
+              />
+            </div>
             <p className="bg-navy px-4 py-2 text-xs font-bold uppercase tracking-wide text-cream">
               {service.shortTitle}
             </p>

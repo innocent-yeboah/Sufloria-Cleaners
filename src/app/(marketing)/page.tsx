@@ -97,6 +97,11 @@ export default function HomePage() {
                   width={600}
                   height={400}
                   className="h-36 w-full object-cover"
+                  style={
+                    service.imagePosition
+                      ? { objectPosition: service.imagePosition }
+                      : undefined
+                  }
                 />
                 <p className="bg-navy px-3 py-2 text-xs font-bold uppercase tracking-wide text-cream">
                   {service.shortTitle}

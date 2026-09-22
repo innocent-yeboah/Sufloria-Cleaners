@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b-[3px] border-gold bg-navy text-cream">
-      <div className="container-site flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      <div className="container-site flex items-center justify-between gap-3 px-4 py-3.5 sm:px-6">
         <BrandLogo inverted />
         <nav className="hidden items-center gap-6 text-sm lg:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (

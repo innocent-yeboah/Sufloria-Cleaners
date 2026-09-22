@@ -20,17 +20,18 @@ export default function BrandLogo({
   return (
     <Link href={href} className="inline-flex items-center gap-3" aria-label={COMPANY.name}>
       <Image
-        src="/brand/logo.jpg"
+        src="/brand/logo-mark.png"
         alt=""
-        width={56}
-        height={56}
-        className="h-12 w-12 rounded-full border-2 border-gold bg-white object-cover"
+        width={945}
+        height={555}
+        unoptimized
+        className="h-16 w-auto object-contain drop-shadow-sm sm:h-[4.5rem]"
         priority
       />
       {showWordmark ? (
         <span className="leading-tight">
           <span
-            className={`block font-heading text-lg font-bold ${light ? "text-gold-light" : "text-navy"}`}
+            className={`block font-heading text-lg font-bold sm:text-xl ${light ? "text-gold-light" : "text-navy"}`}
           >
             {COMPANY.name}
           </span>

@@ -32,6 +32,11 @@ export default function ServicesPage() {
                 width={800}
                 height={520}
                 className="h-44 w-full object-cover"
+                style={
+                  service.imagePosition
+                    ? { objectPosition: service.imagePosition }
+                    : undefined
+                }
               />
               <div className="bg-navy px-4 py-2 text-xs font-bold uppercase tracking-wide text-cream">
                 {service.title}

@@ -86,6 +86,8 @@ export interface Service {
   audience: string;
   image: string;
   imageAlt: string;
+  /** CSS object-position for professional crop in landscape frames */
+  imagePosition?: string;
 }
 
 export const SERVICES: Service[] = [
@@ -140,9 +142,10 @@ export const SERVICES: Service[] = [
       "Works alongside sparkle and handover cleans",
     ],
     audience: "Housebuilders, developers and construction companies",
-    image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Newly finished interior after building work",
+    image: "/services/after-builders.jpg",
+    imageAlt:
+      "Kitchen mid-refurbishment with dust, tools and debris — the kind of site Sufloria prepares after builders leave",
+    imagePosition: "center 32%",
   },
   {
     slug: "sparkle-handover",
@@ -229,9 +232,10 @@ export const SERVICES: Service[] = [
       "Quoted with the rest of the property or on its own",
     ],
     audience: "Landlords, agents, homeowners and businesses",
-    image:
-      "https://images.unsplash.com/photo-1558317374-067fb5f30049?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Carpet being professionally cleaned",
+    image: "/services/carpet.jpg",
+    imageAlt:
+      "Before and after carpet clean — stained rug restored with professional steam cleaning equipment",
+    imagePosition: "center center",
   },
   {
     slug: "oven-appliance",
