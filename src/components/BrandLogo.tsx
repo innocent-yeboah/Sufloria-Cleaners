@@ -32,7 +32,7 @@ export default function BrandLogo({
           <span
             className={`block font-heading text-lg font-bold ${light ? "text-gold-light" : "text-navy"}`}
           >
-            {COMPANY.shortName}
+            {COMPANY.name}
           </span>
           <span className={`block font-script text-sm ${light ? "text-gold" : "text-gold-dark"}`}>
             {COMPANY.tagline}
