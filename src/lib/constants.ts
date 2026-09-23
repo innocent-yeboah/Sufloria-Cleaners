@@ -12,7 +12,7 @@ export const COMPANY = {
   phoneHref: "tel:+447386544703",
   phoneDisplayLocal: "07386 544703",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "447386544703",
-  companyNumber: "",
+  companyNumber: "17450467",
   registeredOffice: ["Derby", "United Kingdom"] as const,
   address: {
     streetAddress: "Derby",

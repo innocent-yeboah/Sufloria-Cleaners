@@ -56,6 +56,7 @@ export default function Footer() {
       <div className="border-t border-gold/40 px-4 py-6 text-center text-xs text-cream/70 sm:px-6">
         <p>
           © {new Date().getFullYear()} {COMPANY.name}. {COMPANY.tagline}.
+          {COMPANY.companyNumber ? ` Company No: ${COMPANY.companyNumber}.` : ""}
         </p>
         <p className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1">
           {LEGAL_LINKS.map((link) => (
