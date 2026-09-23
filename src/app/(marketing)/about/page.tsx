@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BrandTagline from "@/components/BrandTagline";
 import { AUDIENCES, COMPANY, MEDALS } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export default function AboutPage() {
   return (
     <div className="section-padding">
       <div className="container-site max-w-4xl">
-        <p className="section-label">{COMPANY.tagline}</p>
+        <BrandTagline className="section-label" />
         <h1 className="heading-xl">{COMPANY.uspHeadline}</h1>
         <div className="gold-frame mt-8 space-y-5 bg-white p-6 sm:p-10">
           <p>

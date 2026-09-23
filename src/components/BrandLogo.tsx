@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import BrandTagline from "@/components/BrandTagline";
 import { COMPANY } from "@/lib/constants";
 
 type BrandLogoProps = {
@@ -23,7 +24,7 @@ export default function BrandLogo({
         src="/brand/logo-mark.png"
         alt=""
         width={945}
-        height={555}
+        height={488}
         unoptimized
         className="h-16 w-auto object-contain drop-shadow-sm sm:h-[4.5rem]"
         priority
@@ -35,9 +36,9 @@ export default function BrandLogo({
           >
             {COMPANY.name}
           </span>
-          <span className={`block font-script text-sm ${light ? "text-gold" : "text-gold-dark"}`}>
-            {COMPANY.tagline}
-          </span>
+          <BrandTagline
+            className={`block font-script text-sm ${light ? "text-gold" : "text-gold-dark"}`}
+          />
         </span>
       ) : null}
     </Link>

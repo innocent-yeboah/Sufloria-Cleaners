@@ -50,7 +50,7 @@ UPDATE public.company_settings
 SET
   company_name = 'Sufloria Cleaners',
   trading_name = 'Sufloria Cleaning',
-  email = 'contact@sufloriacleaning.com',
+  email = 'contact@sufloriacleaners.com',
   phone = '07386 544703',
   website = 'https://sufloriacleaning.com',
   invoice_prefix = 'SUF',

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Great_Vibes, Inter, Playfair_Display } from "next/font/google";
+import { Allura, Inter, Playfair_Display } from "next/font/google";
 import { CookieConsentProvider } from "@/components/CookieConsent";
 import SkipToContent from "@/components/SkipToContent";
 import JsonLd from "@/components/JsonLd";
@@ -24,7 +24,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const script = Great_Vibes({
+const script = Allura({
   subsets: ["latin"],
   variable: "--font-script",
   display: "swap",

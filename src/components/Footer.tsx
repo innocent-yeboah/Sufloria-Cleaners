@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BrandTagline from "@/components/BrandTagline";
 import { CookieSettingsButton } from "@/components/CookieConsent";
 import { COMPANY, LEGAL_LINKS, NAV_LINKS, SERVICES } from "@/lib/constants";
 
@@ -8,7 +9,7 @@ export default function Footer() {
       <div className="container-site grid gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div>
           <p className="font-heading text-xl text-gold-light">{COMPANY.name}</p>
-          <p className="mt-1 font-script text-xl text-gold">{COMPANY.tagline}</p>
+          <BrandTagline className="mt-1 block font-script text-xl text-gold" />
           <p className="mt-4 text-sm text-cream/80">
             Derby and surrounding areas
           </p>

@@ -6,7 +6,7 @@ import { COMPANY } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Call, WhatsApp or request a free quote from Sufloria Cleaners in Derby. 07386 544703 · contact@sufloriacleaning.com",
+    "Call, WhatsApp or request a free quote from Sufloria Cleaners in Derby. 07386 544703 · contact@sufloriacleaners.com",
 };
 
 export default function ContactPage() {

@@ -104,7 +104,7 @@ export async function POST(request: Request) {
       if (resend) {
         await resend.emails.send({
           from: process.env.CONTACT_FROM_EMAIL || "Sufloria Cleaners <onboarding@resend.dev>",
-          to: [process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaning.com"],
+          to: [process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com"],
           replyTo: email,
           subject: `New Sufloria quote request — ${service}`,
           html: `<p><strong>${escapeHtml(name)}</strong> (${escapeHtml(email)} / ${escapeHtml(phone)})</p><pre>${escapeHtml(notes)}</pre>`,
@@ -176,7 +176,7 @@ export async function POST(request: Request) {
     if (resend) {
       await resend.emails.send({
         from: process.env.CONTACT_FROM_EMAIL || "Sufloria Cleaners <onboarding@resend.dev>",
-        to: [process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaning.com"],
+        to: [process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com"],
         replyTo: email,
         subject: `New Sufloria quote request — ${service}`,
         html: `

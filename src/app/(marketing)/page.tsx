@@ -28,11 +28,11 @@ export default function HomePage() {
               Trusted local cleaning experts
             </div>
             <p className="text-sm font-semibold uppercase tracking-wide text-gold-dark">
-              Derby and surrounding areas
+              {COMPANY.name}
             </p>
-            <h1 className="heading-xl mt-2">{COMPANY.uspHeadline}</h1>
-            <p className="section-label mt-2">{COMPANY.tagline}</p>
+            <h1 className="heading-xl mt-2">{COMPANY.heroHeadline}</h1>
             <p className="lead mt-3 max-w-xl text-dark/75">{COMPANY.heroSubheadline}</p>
+            <p className="section-label mt-3">{COMPANY.uspHeadline}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote" className="btn-primary">
                 Get a free quote

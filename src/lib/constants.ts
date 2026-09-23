@@ -4,9 +4,10 @@ export const COMPANY = {
   legalName: "Sufloria Cleaners",
   tagline: "A Higher Standard of Clean",
   uspHeadline: "More Than Cleaning. We Get Properties Ready.",
+  heroHeadline: "Professional Property Cleaning Services in Derby",
   heroSubheadline:
-    "Professional Property Cleaning for Agents, Landlords, Developers, Businesses & Homeowners Across Derby",
-  email: "contact@sufloriacleaning.com",
+    "Specialist cleaning for end-of-tenancy properties, new-build handovers, commercial premises, Airbnb/holiday lets and homes across Derby and surrounding areas.",
+  email: "contact@sufloriacleaners.com",
   phone: "+44 7386 544703",
   phoneHref: "tel:+447386544703",
   phoneDisplayLocal: "07386 544703",
