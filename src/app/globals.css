@@ -76,7 +76,7 @@ body {
   }
 
   .section-label {
-    @apply mb-3 font-script text-xl text-gold-dark sm:text-2xl;
+    @apply mb-3 font-script text-2xl leading-snug tracking-wide text-gold-dark sm:text-3xl;
   }
 }
 

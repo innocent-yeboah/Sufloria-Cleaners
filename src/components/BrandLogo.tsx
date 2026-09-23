@@ -37,7 +37,7 @@ export default function BrandLogo({
             {COMPANY.name}
           </span>
           <BrandTagline
-            className={`block font-script text-sm ${light ? "text-gold" : "text-gold-dark"}`}
+            className={`block font-script text-lg leading-snug tracking-wide sm:text-xl ${light ? "text-gold" : "text-gold-dark"}`}
           />
         </span>
       ) : null}

@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="container-site grid gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div>
           <p className="font-heading text-xl text-gold-light">{COMPANY.name}</p>
-          <BrandTagline className="mt-1 block font-script text-xl text-gold" />
+          <BrandTagline className="mt-1 block font-script text-2xl leading-snug tracking-wide text-gold" />
           <p className="mt-4 text-sm text-cream/80">
             Derby and surrounding areas
           </p>
