@@ -24,7 +24,7 @@ export async function GET(_request: Request, { params }: Params) {
 }
 
 export async function PATCH(request: Request, { params }: Params) {
-  const ctx = await getAdminApiContext();
+  const ctx = await getAdminApiContext(["admin", "manager", "scheduler"]);
   if (!ctx.ok) return ctx.error;
 
   const body = await request.json();
@@ -32,6 +32,12 @@ export async function PATCH(request: Request, { params }: Params) {
   if (!parsed.ok) return parsed.error;
 
   const updates: Record<string, unknown> = { ...parsed.data };
+
+  // Normalize empty strings to null for optional columns
+  for (const key of Object.keys(updates)) {
+    if (updates[key] === "") updates[key] = null;
+  }
+
   if (updates.status === "contacted") {
     updates.contacted_at = new Date().toISOString();
   }

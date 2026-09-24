@@ -82,7 +82,15 @@ export type Lead = {
   notes: string | null;
   quote_amount: number | null;
   closing_at: string | null;
+  contacted_at: string | null;
+  quoted_at: string | null;
+  booked_at: string | null;
   lost_reason: string | null;
+  enquiry_type: string | null;
+  client_type: string | null;
+  postcode: string | null;
+  preferred_date: string | null;
+  photo_paths: string[] | null;
 };
 
 export type Client = {

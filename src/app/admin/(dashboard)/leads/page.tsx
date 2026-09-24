@@ -114,6 +114,11 @@ export default async function AdminLeadsPage({
                 : "—",
           },
           {
+            key: "postcode",
+            header: "Postcode",
+            cell: (row) => row.postcode || "—",
+          },
+          {
             key: "status",
             header: "Status",
             cell: (row) => <StatusBadge value={row.status} />,

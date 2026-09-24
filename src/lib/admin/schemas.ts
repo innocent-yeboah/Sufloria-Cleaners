@@ -27,14 +27,43 @@ export const leadCreateSchema = z.object({
 });
 
 export const leadUpdateSchema = z.object({
+  name: z.string().trim().min(2).max(120).optional(),
+  email: z.string().trim().email().max(160).optional(),
+  phone: z.string().trim().max(40).optional().nullable().or(z.literal("")),
+  service_interest: z
+    .enum([
+      "end_of_tenancy",
+      "move_in",
+      "after_builders",
+      "sparkle_handover",
+      "deep_cleaning",
+      "commercial",
+      "airbnb",
+      "carpet",
+      "oven_appliance",
+      "decluttering",
+      "other",
+    ])
+    .optional()
+    .nullable(),
   status: z.enum(LEAD_STATUSES).optional(),
   priority: z.enum(["low", "normal", "high"]).optional(),
-  notes: z.string().trim().max(5000).optional().nullable(),
+  notes: z.string().trim().max(5000).optional().nullable().or(z.literal("")),
   quote_amount: z.coerce.number().nonnegative().optional().nullable(),
-  lost_reason: z.string().trim().max(1000).optional().nullable(),
-  assigned_to: z.string().uuid().optional().nullable(),
-  phone: z.string().trim().max(40).optional().nullable(),
-  message: z.string().trim().max(5000).optional().nullable(),
+  lost_reason: z.string().trim().max(1000).optional().nullable().or(z.literal("")),
+  assigned_to: z
+    .string()
+    .uuid()
+    .optional()
+    .nullable()
+    .or(z.literal("")),
+  message: z.string().trim().max(5000).optional().nullable().or(z.literal("")),
+  postcode: z.string().trim().max(20).optional().nullable().or(z.literal("")),
+  preferred_date: z.string().optional().nullable().or(z.literal("")),
+  enquiry_type: z.string().trim().max(80).optional().nullable().or(z.literal("")),
+  client_type: z.string().trim().max(80).optional().nullable().or(z.literal("")),
+  property_size: z.string().trim().max(80).optional().nullable().or(z.literal("")),
+  property_type: z.string().trim().max(80).optional().nullable().or(z.literal("")),
 });
 
 export const leadConvertSchema = z.object({
