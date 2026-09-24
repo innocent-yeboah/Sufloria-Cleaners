@@ -180,9 +180,10 @@ export const SERVICES: Service[] = [
       "Quoted according to the condition of the property",
     ],
     audience: "Homeowners, landlords, buyers and sellers",
-    image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Thorough kitchen deep clean in progress",
+    image: "/services/deep-cleaning.jpg",
+    imageAlt:
+      "Before and after deep clean — soiled kitchen tiles restored to a high shine with professional equipment",
+    imagePosition: "center center",
   },
   {
     slug: "commercial",
@@ -235,8 +236,8 @@ export const SERVICES: Service[] = [
     audience: "Landlords, agents, homeowners and businesses",
     image: "/services/carpet.jpg",
     imageAlt:
-      "Before and after carpet clean — stained rug restored with professional steam cleaning equipment",
-    imagePosition: "center center",
+      "Professional carpet cleaning with high-pressure equipment lifting dirt from a patterned rug",
+    imagePosition: "center 40%",
   },
   {
     slug: "oven-appliance",
