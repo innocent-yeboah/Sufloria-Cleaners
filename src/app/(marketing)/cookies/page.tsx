@@ -3,7 +3,7 @@ import LegalPage from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
-  description: "How Sufloria Cleaners uses cookies on sufloriacleaning.com.",
+  description: "How Sufloria Cleaners uses cookies on sufloriacleaners.com.",
 };
 
 export default function CookiesPage() {

@@ -1,7 +1,7 @@
 import { COMPANY, SERVICE_AREAS, SERVICES } from "@/lib/constants";
 
 export function getSiteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://sufloriacleaning.com").replace(
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://sufloriacleaners.com").replace(
     /\/$/,
     ""
   );

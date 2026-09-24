@@ -52,7 +52,7 @@ SET
   trading_name = 'Sufloria Cleaning',
   email = 'contact@sufloriacleaners.com',
   phone = '07386 544703',
-  website = 'https://sufloriacleaning.com',
+  website = 'https://sufloriacleaners.com',
   invoice_prefix = 'SUF',
   timezone = 'Europe/London'
 WHERE true;

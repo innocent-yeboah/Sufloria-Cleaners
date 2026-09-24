@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { SERVICES } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sufloriacleaning.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sufloriacleaners.com";
   const routes = [
     "",
     "/services",

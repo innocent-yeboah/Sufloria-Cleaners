@@ -41,7 +41,7 @@ export function parseEmailRecipients(raw: string | undefined | null): string[] {
 }
 
 function siteOrigin(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://sufloriacleaning.com").replace(
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://sufloriacleaners.com").replace(
     /\/$/,
     ""
   );
@@ -165,7 +165,7 @@ function emailShell(options: {
                       &nbsp;&nbsp;|&nbsp;&nbsp;
                       <a href="mailto:${escapeHtml(COMPANY.email)}" style="color:${TEAL};text-decoration:none;">${escapeHtml(COMPANY.email)}</a>
                       &nbsp;&nbsp;|&nbsp;&nbsp;
-                      <a href="${siteOrigin()}" style="color:${TEAL};text-decoration:none;">sufloriacleaning.com</a>
+                      <a href="${siteOrigin()}" style="color:${TEAL};text-decoration:none;">sufloriacleaners.com</a>
                     </p>
                   </td>
                 </tr>
