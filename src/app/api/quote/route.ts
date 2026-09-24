@@ -28,6 +28,64 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+type QuoteEmailInput = {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  notes: string;
+};
+
+async function sendQuoteEmails(input: QuoteEmailInput): Promise<void> {
+  const resend = getResendClient();
+  if (!resend) {
+    console.error("Quote emails skipped: RESEND_API_KEY is not configured.");
+    return;
+  }
+
+  const from =
+    process.env.CONTACT_FROM_EMAIL ||
+    "Sufloria Cleaners <contact@sufloriacleaners.com>";
+  const businessTo =
+    process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com";
+
+  const business = await resend.emails.send({
+    from,
+    to: [businessTo],
+    replyTo: input.email,
+    subject: `New Sufloria quote request — ${input.service}`,
+    html: `
+      <h2>New Sufloria quote request</h2>
+      <p><strong>Name:</strong> ${escapeHtml(input.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(input.email)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(input.phone)}</p>
+      <p><strong>Service:</strong> ${escapeHtml(input.service)}</p>
+      <p>${escapeHtml(input.notes).replace(/\n/g, "<br />")}</p>
+    `,
+  });
+
+  if (business.error) {
+    console.error("Business quote email failed:", business.error);
+  }
+
+  const confirmation = await resend.emails.send({
+    from,
+    to: [input.email],
+    replyTo: businessTo,
+    subject: "We've received your Sufloria Cleaners enquiry",
+    html: `
+      <p>Hi ${escapeHtml(input.name)},</p>
+      <p>Thank you for contacting <strong>Sufloria Cleaners</strong>. We've received your enquiry about <strong>${escapeHtml(input.service)}</strong> and will get back to you shortly.</p>
+      <p>If you need us sooner, call or WhatsApp <strong>07386 544703</strong>.</p>
+      <p>Kind regards,<br />Sufloria Cleaners</p>
+    `,
+  });
+
+  if (confirmation.error) {
+    console.error("Customer confirmation email failed:", confirmation.error);
+  }
+}
+
 export async function POST(request: Request) {
   try {
     pruneRateLimits();
@@ -100,21 +158,17 @@ export async function POST(request: Request) {
     try {
       supabase = createSupabaseServiceClient();
     } catch {
-      const resend = getResendClient();
-      if (resend) {
-        await resend.emails.send({
-          from: process.env.CONTACT_FROM_EMAIL || "Sufloria Cleaners <onboarding@resend.dev>",
-          to: [process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com"],
-          replyTo: email,
-          subject: `New Sufloria quote request — ${service}`,
-          html: `<p><strong>${escapeHtml(name)}</strong> (${escapeHtml(email)} / ${escapeHtml(phone)})</p><pre>${escapeHtml(notes)}</pre>`,
-        });
-        return NextResponse.json({ ok: true });
+      if (!getResendClient()) {
+        return NextResponse.json(
+          {
+            error:
+              "We're unable to accept enquiries right now. Please call or WhatsApp us.",
+          },
+          { status: 503 }
+        );
       }
-      return NextResponse.json(
-        { error: "We're unable to accept enquiries right now. Please call or WhatsApp us." },
-        { status: 503 }
-      );
+      await sendQuoteEmails({ name, email, phone, service, notes });
+      return NextResponse.json({ ok: true });
     }
 
     const { data: leadRow, error: leadError } = await supabase
@@ -172,23 +226,13 @@ export async function POST(request: Request) {
         .eq("id", leadRow.id);
     }
 
-    const resend = getResendClient();
-    if (resend) {
-      await resend.emails.send({
-        from: process.env.CONTACT_FROM_EMAIL || "Sufloria Cleaners <onboarding@resend.dev>",
-        to: [process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com"],
-        replyTo: email,
-        subject: `New Sufloria quote request — ${service}`,
-        html: `
-          <h2>New Sufloria quote request</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-          <p><strong>Service:</strong> ${escapeHtml(service)}</p>
-          <p>${escapeHtml(notes).replace(/\n/g, "<br />")}</p>
-        `,
-      });
-    }
+    await sendQuoteEmails({
+      name,
+      email,
+      phone,
+      service,
+      notes,
+    });
 
     return NextResponse.json({ ok: true });
   } catch (error) {
