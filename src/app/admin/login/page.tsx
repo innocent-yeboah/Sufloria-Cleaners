@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-soft">
         <BrandLogo />
         <h1 className="mt-5 font-heading text-2xl font-bold text-navy">
-          Staff sign in
+          Admin Sign in
         </h1>
         <p className="mt-2 text-sm text-dark/70">
           Secure access to the business operating system.

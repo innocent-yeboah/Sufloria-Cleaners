@@ -10,6 +10,7 @@ import {
   buildBusinessQuoteEmailHtml,
   buildCustomerQuoteEmailHtml,
   getBrandLogoAttachment,
+  parseEmailRecipients,
 } from "@/lib/email/quote-emails";
 
 function isValidEmail(email: string): boolean {
@@ -42,73 +43,90 @@ async function sendQuoteEmails(input: QuoteEmailInput): Promise<void> {
   const from =
     process.env.CONTACT_FROM_EMAIL ||
     "Sufloria Cleaners <contact@sufloriacleaners.com>";
-  const businessRecipients = String(
+
+  const businessRecipients = parseEmailRecipients(
     process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com"
-  )
-    .split(",")
-    .map((value) => value.trim())
-    .filter((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+  );
 
   if (!businessRecipients.length) {
-    console.error("Quote emails skipped: CONTACT_TO_EMAIL has no valid addresses.");
+    console.error(
+      "Quote emails skipped: CONTACT_TO_EMAIL has no valid addresses.",
+      process.env.CONTACT_TO_EMAIL
+    );
     return;
   }
 
   const replyToBusiness = businessRecipients[0]!;
-  const logo = getBrandLogoAttachment();
-  const attachments = logo
-    ? [
-        {
-          filename: logo.filename,
-          content: logo.content,
-          inlineContentId: logo.contentId,
-        },
-      ]
-    : undefined;
-  const hasInlineLogo = Boolean(logo);
 
-  const business = await resend.emails.send({
-    from,
-    to: businessRecipients,
-    replyTo: input.email,
-    subject: `New Sufloria quote request — ${input.service}`,
-    html: buildBusinessQuoteEmailHtml({ ...input, hasInlineLogo }),
-    attachments,
-  });
+  const sendPair = async (withLogo: boolean) => {
+    const logo = withLogo ? getBrandLogoAttachment() : null;
+    const attachments = logo
+      ? [
+          {
+            filename: logo.filename,
+            content: logo.content,
+            inlineContentId: logo.contentId,
+          },
+        ]
+      : undefined;
+    const hasInlineLogo = Boolean(logo);
 
-  if (business.error) {
-    console.error("Business quote email failed:", business.error);
-  } else {
+    const business = await resend.emails.send({
+      from,
+      to: businessRecipients,
+      replyTo: input.email,
+      subject: `New Sufloria quote request — ${input.service}`,
+      html: buildBusinessQuoteEmailHtml({ ...input, hasInlineLogo }),
+      attachments,
+    });
+
+    if (business.error) {
+      console.error("Business quote email failed:", business.error);
+      throw new Error(business.error.message || "Business email failed");
+    }
+
     console.info(
       "Business quote email sent:",
       business.data?.id,
       "→",
       businessRecipients
     );
-  }
 
-  const confirmation = await resend.emails.send({
-    from,
-    to: [input.email],
-    replyTo: replyToBusiness,
-    subject: "We've received your Sufloria Cleaners enquiry",
-    html: buildCustomerQuoteEmailHtml({
-      name: input.name,
-      service: input.service,
-      hasInlineLogo,
-    }),
-    attachments,
-  });
+    const confirmation = await resend.emails.send({
+      from,
+      to: [input.email],
+      replyTo: replyToBusiness,
+      subject: "We've received your Sufloria Cleaners enquiry",
+      html: buildCustomerQuoteEmailHtml({
+        name: input.name,
+        service: input.service,
+        hasInlineLogo,
+      }),
+      attachments,
+    });
 
-  if (confirmation.error) {
-    console.error("Customer confirmation email failed:", confirmation.error);
-  } else {
+    if (confirmation.error) {
+      console.error("Customer confirmation email failed:", confirmation.error);
+      throw new Error(confirmation.error.message || "Customer email failed");
+    }
+
     console.info(
       "Customer confirmation email sent:",
       confirmation.data?.id,
       "→",
       input.email
     );
+  };
+
+  try {
+    await sendPair(true);
+  } catch (firstError) {
+    console.error("Branded quote email attempt failed, retrying without logo:", firstError);
+    try {
+      await sendPair(false);
+    } catch (secondError) {
+      console.error("Quote email retry without logo also failed:", secondError);
+    }
   }
 }
 
@@ -252,13 +270,18 @@ export async function POST(request: Request) {
         .eq("id", leadRow.id);
     }
 
-    await sendQuoteEmails({
-      name,
-      email,
-      phone,
-      service,
-      notes,
-    });
+    try {
+      await sendQuoteEmails({
+        name,
+        email,
+        phone,
+        service,
+        notes,
+      });
+    } catch (emailError) {
+      // Lead is already saved — never fail the customer response on email issues
+      console.error("Quote saved but email notification failed:", emailError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
