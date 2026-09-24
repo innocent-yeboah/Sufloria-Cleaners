@@ -6,6 +6,11 @@ import { getResendClient } from "@/lib/resend";
 import { mapWebsiteServiceToLead } from "@/lib/lead-service";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 import { verifyTurnstileToken } from "@/lib/turnstile";
+import {
+  buildBusinessQuoteEmailHtml,
+  buildCustomerQuoteEmailHtml,
+  getBrandLogoAttachment,
+} from "@/lib/email/quote-emails";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -17,15 +22,6 @@ function getClientIp(request: Request): string {
     return forwarded.split(",")[0]?.trim() || "unknown";
   }
   return request.headers.get("x-real-ip") || "unknown";
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 }
 
 type QuoteEmailInput = {
@@ -46,43 +42,73 @@ async function sendQuoteEmails(input: QuoteEmailInput): Promise<void> {
   const from =
     process.env.CONTACT_FROM_EMAIL ||
     "Sufloria Cleaners <contact@sufloriacleaners.com>";
-  const businessTo =
-    process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com";
+  const businessRecipients = String(
+    process.env.CONTACT_TO_EMAIL || "contact@sufloriacleaners.com"
+  )
+    .split(",")
+    .map((value) => value.trim())
+    .filter((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+
+  if (!businessRecipients.length) {
+    console.error("Quote emails skipped: CONTACT_TO_EMAIL has no valid addresses.");
+    return;
+  }
+
+  const replyToBusiness = businessRecipients[0]!;
+  const logo = getBrandLogoAttachment();
+  const attachments = logo
+    ? [
+        {
+          filename: logo.filename,
+          content: logo.content,
+          inlineContentId: logo.contentId,
+        },
+      ]
+    : undefined;
+  const hasInlineLogo = Boolean(logo);
 
   const business = await resend.emails.send({
     from,
-    to: [businessTo],
+    to: businessRecipients,
     replyTo: input.email,
     subject: `New Sufloria quote request — ${input.service}`,
-    html: `
-      <h2>New Sufloria quote request</h2>
-      <p><strong>Name:</strong> ${escapeHtml(input.name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(input.email)}</p>
-      <p><strong>Phone:</strong> ${escapeHtml(input.phone)}</p>
-      <p><strong>Service:</strong> ${escapeHtml(input.service)}</p>
-      <p>${escapeHtml(input.notes).replace(/\n/g, "<br />")}</p>
-    `,
+    html: buildBusinessQuoteEmailHtml({ ...input, hasInlineLogo }),
+    attachments,
   });
 
   if (business.error) {
     console.error("Business quote email failed:", business.error);
+  } else {
+    console.info(
+      "Business quote email sent:",
+      business.data?.id,
+      "→",
+      businessRecipients
+    );
   }
 
   const confirmation = await resend.emails.send({
     from,
     to: [input.email],
-    replyTo: businessTo,
+    replyTo: replyToBusiness,
     subject: "We've received your Sufloria Cleaners enquiry",
-    html: `
-      <p>Hi ${escapeHtml(input.name)},</p>
-      <p>Thank you for contacting <strong>Sufloria Cleaners</strong>. We've received your enquiry about <strong>${escapeHtml(input.service)}</strong> and will get back to you shortly.</p>
-      <p>If you need us sooner, call or WhatsApp <strong>07386 544703</strong>.</p>
-      <p>Kind regards,<br />Sufloria Cleaners</p>
-    `,
+    html: buildCustomerQuoteEmailHtml({
+      name: input.name,
+      service: input.service,
+      hasInlineLogo,
+    }),
+    attachments,
   });
 
   if (confirmation.error) {
     console.error("Customer confirmation email failed:", confirmation.error);
+  } else {
+    console.info(
+      "Customer confirmation email sent:",
+      confirmation.data?.id,
+      "→",
+      input.email
+    );
   }
 }
 
