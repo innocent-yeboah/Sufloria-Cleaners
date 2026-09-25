@@ -19,7 +19,11 @@ export default function BrandLogo({
   const light = inverted || variant === "light";
 
   return (
-    <Link href={href} className="inline-flex items-center gap-3" aria-label={COMPANY.name}>
+    <Link
+      href={href}
+      className="inline-flex min-h-11 items-center gap-3"
+      aria-label={showWordmark ? undefined : COMPANY.name}
+    >
       <Image
         src="/brand/logo-mark.png"
         alt=""

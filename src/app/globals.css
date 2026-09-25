@@ -56,15 +56,19 @@ body {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-gold-dark bg-lemon px-6 py-3 text-sm font-bold text-navy transition duration-300 hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border-2 border-gold-dark bg-lemon px-6 py-3 text-sm font-bold text-navy transition duration-300 hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-gold bg-transparent px-6 py-3 text-sm font-bold text-gold transition duration-300 hover:bg-gold hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border-2 border-gold bg-transparent px-6 py-3 text-sm font-bold text-navy transition duration-300 hover:bg-gold hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+  }
+
+  .btn-secondary-on-dark {
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border-2 border-gold bg-navy px-6 py-3 text-sm font-bold text-gold-light transition duration-300 hover:bg-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
   }
 
   .btn-navy {
-    @apply inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 text-sm font-bold text-white transition duration-300 hover:bg-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-navy px-6 py-3 text-sm font-bold text-white transition duration-300 hover:bg-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
   }
 
   .heading-xl {

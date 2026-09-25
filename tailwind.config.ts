@@ -14,7 +14,8 @@ const config: Config = {
         teal: "#0F5C56",
         gold: "#C9A227",
         "gold-light": "#E8C547",
-        "gold-dark": "#8B6914",
+        // Darkened for WCAG AA on cream/white (~5.4:1); keep lemon/gold for accents on navy
+        "gold-dark": "#7A5C12",
         cream: "#F4EFE4",
         light: "#F4EFE4",
         dark: "#1A1A1A",

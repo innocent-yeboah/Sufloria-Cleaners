@@ -261,14 +261,14 @@ function CookieBanner() {
             <button
               type="button"
               onClick={openSettings}
-              className="rounded-full border-2 border-gold px-4 py-2.5 text-sm font-bold text-gold-light"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border-2 border-gold px-4 py-2.5 text-sm font-bold text-gold-light"
             >
               Manage preferences
             </button>
             <button
               type="button"
               onClick={rejectNonEssential}
-              className="rounded-full border-2 border-gold px-4 py-2.5 text-sm font-bold text-gold-light"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border-2 border-gold px-4 py-2.5 text-sm font-bold text-gold-light"
             >
               Reject non-essential
             </button>

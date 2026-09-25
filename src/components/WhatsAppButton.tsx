@@ -15,8 +15,8 @@ export default function WhatsAppButton() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
-      className={`fixed right-5 z-50 inline-flex items-center gap-2 rounded-full border-[3px] border-gold bg-navy px-4 py-2.5 text-sm font-bold text-gold-light shadow-soft transition hover:bg-teal ${
+      aria-label="WhatsApp us"
+      className={`fixed right-5 z-50 inline-flex min-h-11 items-center gap-2 rounded-full border-[3px] border-gold bg-navy px-4 py-2.5 text-sm font-bold text-gold-light shadow-soft transition hover:bg-teal ${
         showBanner ? "bottom-44 sm:bottom-36" : "bottom-5"
       }`}
     >

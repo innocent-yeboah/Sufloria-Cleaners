@@ -157,7 +157,7 @@ export default function HomePage() {
             <Link href="/quote?type=commercial" className="btn-primary">
               Request a commercial quote
             </Link>
-            <Link href="/quote" className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-navy">
+            <Link href="/quote" className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-navy">
               Get a free quote
             </Link>
           </div>

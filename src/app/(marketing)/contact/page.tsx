@@ -49,7 +49,7 @@ export default function ContactPage() {
           <Link href="/quote" className="btn-primary">
             Get a free quote
           </Link>
-          <Link href="/quote?type=commercial" className="btn-secondary bg-navy">
+          <Link href="/quote?type=commercial" className="btn-secondary-on-dark">
             Request a commercial quote
           </Link>
         </div>

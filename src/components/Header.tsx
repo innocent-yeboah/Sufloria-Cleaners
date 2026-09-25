@@ -13,12 +13,12 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b-[3px] border-gold bg-navy text-cream">
       <div className="container-site flex items-center justify-between gap-3 px-4 py-3.5 sm:px-6">
         <BrandLogo inverted />
-        <nav className="hidden items-center gap-6 text-sm lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-1 text-sm lg:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-cream/90 transition hover:text-gold-light"
+              className="inline-flex min-h-11 items-center px-3 text-cream transition hover:text-gold-light"
             >
               {link.label}
             </Link>
@@ -26,7 +26,7 @@ export default function Header() {
         </nav>
         <a
           href={COMPANY.phoneHref}
-          className="hidden rounded-full border border-gold px-3 py-1.5 text-sm text-gold-light md:inline-flex"
+          className="hidden min-h-11 items-center rounded-full border border-gold px-4 py-2 text-sm text-gold-light md:inline-flex"
         >
           {COMPANY.phoneDisplayLocal}
         </a>
@@ -35,31 +35,34 @@ export default function Header() {
         </Link>
         <button
           type="button"
-          className="rounded-lg border border-gold/40 p-2 text-gold-light lg:hidden"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-gold/40 text-gold-light lg:hidden"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((value) => !value)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
         </button>
       </div>
       {open ? (
         <div className="border-t border-gold/30 bg-navy px-4 py-4 lg:hidden">
-          <nav className="flex flex-col gap-3" aria-label="Mobile">
+          <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-cream"
+                className="inline-flex min-h-11 items-center text-cream"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <a href={COMPANY.phoneHref} className="text-gold-light">
+            <a
+              href={COMPANY.phoneHref}
+              className="inline-flex min-h-11 items-center text-gold-light"
+            >
               {COMPANY.phoneDisplayLocal}
             </a>
-            <Link href="/quote" className="btn-primary" onClick={() => setOpen(false)}>
+            <Link href="/quote" className="btn-primary mt-2" onClick={() => setOpen(false)}>
               Get a free quote
             </Link>
           </nav>
