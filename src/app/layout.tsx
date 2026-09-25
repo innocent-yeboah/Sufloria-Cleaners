@@ -22,6 +22,7 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["400", "600", "700"],
 });
 
 const script = Allura({
@@ -29,6 +30,7 @@ const script = Allura({
   variable: "--font-script",
   display: "swap",
   weight: "400",
+  preload: false,
 });
 
 const siteUrl = getSiteUrl();
@@ -72,8 +74,11 @@ export const metadata: Metadata = {
       "Sufloria Cleaners is a trusted cleaning company in Derby, providing commercial cleaning and end of tenancy cleaning. Request your free quote today.",
   },
   icons: {
-    icon: [{ url: "/brand/logo-seal.png" }],
-    apple: [{ url: "/brand/logo-seal.png" }],
+    icon: [
+      { url: "/brand/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/icon-180.png", sizes: "180x180", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/icon-180.png", sizes: "180x180" }],
   },
 };
 

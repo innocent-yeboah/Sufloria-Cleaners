@@ -107,8 +107,7 @@ export const SERVICES: Service[] = [
       "Suitable for agents, landlords and tenants",
     ],
     audience: "Letting agents, landlords, property managers and tenants",
-    image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/end-of-tenancy.jpg",
     imageAlt: "Bright, prepared rental bedroom ready for a new tenancy",
   },
   {
@@ -125,8 +124,7 @@ export const SERVICES: Service[] = [
       "Ideal after purchase, let or renovation",
     ],
     audience: "Homeowners, buyers, landlords and tenants",
-    image:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/move-in.jpg",
     imageAlt: "Clean modern kitchen ready for move-in",
   },
   {
@@ -162,8 +160,7 @@ export const SERVICES: Service[] = [
       "Part of a complete property-readiness sequence",
     ],
     audience: "Developers, housebuilders and sales teams",
-    image:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/sparkle-handover.jpg",
     imageAlt: "Presentation-ready bathroom after a sparkle clean",
   },
   {
@@ -199,8 +196,7 @@ export const SERVICES: Service[] = [
       "Clear communication from quote to completion",
     ],
     audience: "Businesses, property managers and commercial clients",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/commercial.jpg",
     imageAlt: "Clean, bright commercial office interior",
   },
   {
@@ -217,8 +213,7 @@ export const SERVICES: Service[] = [
       "Quoted to the property and turnaround",
     ],
     audience: "Airbnb hosts and holiday-let operators",
-    image:
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/airbnb.jpg",
     imageAlt: "Guest-ready holiday let living space",
   },
   {
@@ -252,8 +247,7 @@ export const SERVICES: Service[] = [
       "Useful at end of tenancy and before move-in",
     ],
     audience: "Landlords, tenants, agents and homeowners",
-    image:
-      "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/oven-appliance.jpg",
     imageAlt: "Clean oven and kitchen appliances",
   },
   {
@@ -270,8 +264,7 @@ export const SERVICES: Service[] = [
       "Can sit alongside a wider deep or void clean",
     ],
     audience: "Families, landlords, housing providers and support organisations",
-    image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=80",
+    image: "/services/decluttering-hoarding.jpg",
     imageAlt: "Room being restored after a declutter",
   },
 ];

@@ -50,10 +50,13 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     if (existing) {
       setPreferences(existing);
       setShowBanner(false);
-    } else {
-      setShowBanner(true);
+      setReady(true);
+      return;
     }
+    // Defer banner so hero LCP can paint first on mobile.
     setReady(true);
+    const timer = window.setTimeout(() => setShowBanner(true), 900);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const decide = useCallback((prefs: CookiePreferences) => {

@@ -55,7 +55,8 @@ export default function ServiceDetailPage({ params }: PageProps) {
                 src={service.image}
                 alt={service.imageAlt}
                 fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="(min-width: 1024px) 40vw, 92vw"
+                quality={70}
                 className="object-cover"
                 style={
                   service.imagePosition

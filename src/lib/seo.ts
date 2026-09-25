@@ -26,10 +26,10 @@ export function buildOrganizationJsonLd() {
     url,
     email: COMPANY.email,
     telephone: COMPANY.phoneHref.replace("tel:", ""),
-    image: absoluteUrl("/brand/logo-seal.png"),
+    image: absoluteUrl("/brand/icon-180.png"),
     logo: {
       "@type": "ImageObject",
-      url: absoluteUrl("/brand/logo-seal.png"),
+      url: absoluteUrl("/brand/icon-180.png"),
     },
     address: {
       "@type": "PostalAddress",

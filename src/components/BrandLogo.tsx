@@ -27,9 +27,9 @@ export default function BrandLogo({
       <Image
         src="/brand/logo-mark.png"
         alt=""
-        width={945}
-        height={488}
-        unoptimized
+        width={360}
+        height={186}
+        sizes="144px"
         className="h-16 w-auto object-contain drop-shadow-sm sm:h-[4.5rem]"
         priority
       />

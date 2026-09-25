@@ -56,8 +56,11 @@ export default function HomePage() {
               alt={SERVICES[0].imageAlt}
               width={900}
               height={700}
+              sizes="(max-width: 1024px) 92vw, 540px"
+              quality={70}
               className="h-64 w-full object-cover sm:h-80"
               priority
+              fetchPriority="high"
             />
             <p className="bg-navy px-4 py-2 text-xs font-bold uppercase tracking-wide text-cream">
               Prepared rental interior, Derby
@@ -84,8 +87,8 @@ export default function HomePage() {
               professional property cleaning designed around what happens next.
             </p>
           </Reveal>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((service) => (
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.slice(0, 6).map((service) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
@@ -96,6 +99,8 @@ export default function HomePage() {
                   alt={service.imageAlt}
                   width={600}
                   height={400}
+                  sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 280px"
+                  quality={60}
                   className="h-36 w-full object-cover"
                   style={
                     service.imagePosition
@@ -108,6 +113,11 @@ export default function HomePage() {
                 </p>
               </Link>
             ))}
+          </div>
+          <div className="mt-6">
+            <Link href="/services" className="btn-secondary">
+              View all services
+            </Link>
           </div>
         </section>
 

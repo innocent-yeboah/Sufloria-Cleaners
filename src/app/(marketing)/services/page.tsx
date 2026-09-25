@@ -31,6 +31,8 @@ export default function ServicesPage() {
                 alt={service.imageAlt}
                 width={800}
                 height={520}
+                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 33vw"
+                quality={65}
                 className="h-44 w-full object-cover"
                 style={
                   service.imagePosition

@@ -1,7 +1,14 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import ScrollProgress from "@/components/ScrollProgress";
+import dynamic from "next/dynamic";
+
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
+  ssr: false,
+});
+
+const ScrollProgress = dynamic(() => import("@/components/ScrollProgress"), {
+  ssr: false,
+});
 
 export default function MarketingLayout({
   children,
